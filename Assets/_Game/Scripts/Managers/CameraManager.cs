@@ -3,13 +3,20 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
+    public static CameraManager instance;
+
     [Title("Refs")]
     [SerializeField]
     private Camera _globalCam;
     [SerializeField]
     private Camera _zoomedCam;
-    [SerializeField]
-    FadeInOut _fade;
+    public FadeInOut fade;
+
+    private void Awake()
+    {
+        if(instance == null)
+            instance = this;
+    }
 
     private void Start()
     {
@@ -23,9 +30,9 @@ public class CameraManager : MonoBehaviour
 
     private void ChangeView(bool toGlobalView)
     {
-        _fade.onFadeInFinished.RemoveListener(() => ToggleCams(toGlobalView));
-        _fade.onFadeInFinished.AddListener(() => ToggleCams(toGlobalView));
-        _fade.LaunchFade();
+        fade.onFadeInFinished.RemoveListener(() => ToggleCams(toGlobalView));
+        fade.onFadeInFinished.AddListener(() => ToggleCams(toGlobalView));
+        fade.LaunchFade();
     }
 
     private void ToggleCams(bool globalIsActive)
