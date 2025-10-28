@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     [Title("Runtime")]
     [ReadOnly]
-    public DraggableObject currentDraggedObject;
+    public InterractableObject currentDraggedObject;
     public enum GamePhase { ENVIRONMENT, EDITION }
     [ReadOnly]
     public GamePhase currentPhase = GamePhase.ENVIRONMENT;
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         InitEnvironmentPhase();
     }
 
-    public void OnStartEditing(DraggableObject draggedObject)
+    public void OnStartEditing(InterractableObject draggedObject)
     {
         currentDraggedObject = draggedObject;
         CameraManager.instance.fade.onFadeInFinished.AddListener(InitEditionPhase);
