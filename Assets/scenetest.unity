@@ -149,10 +149,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53dedb3e7263e247bb84b17390714a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleSpeed: 1
   MinScale: 0.2
   MaxScale: 10
-  ScaleUp: 0.01
+  ScaleUp: 0.005
   ScaleDown: -0.001
 --- !u!212 &696546136
 SpriteRenderer:
