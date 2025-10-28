@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class stretchsqueeze : MonoBehaviour
 {
-    public float scaleSpeed = 10000000f;
+    //tailles minimales et maximales des sprites
     public float MinScale = 0.01f;
     public float MaxScale = 3f;
 
+    //Valeurs utilisés lors des stretch et squeeze
     public float ScaleUp = 1f;
     public float ScaleDown = -0.5f;
 
@@ -22,6 +23,8 @@ public class stretchsqueeze : MonoBehaviour
 
         Scale = transform.localScale;
 
+
+       
         if (Input.GetKey(KeyCode.E))
         {
             Scale += new Vector3(ScaleUp, ScaleDown, 0) ;
@@ -32,6 +35,7 @@ public class stretchsqueeze : MonoBehaviour
             Scale += new Vector3(ScaleDown, ScaleUp, 0) ;
         }
 
+        //Clamp la taille possible de l'objet
         Scale.y = Mathf.Clamp(Scale.y, MinScale, MaxScale);
         Scale.x = Mathf.Clamp(Scale.x, MinScale, MaxScale);
 
