@@ -15,12 +15,15 @@ public class DraggableObject : MonoBehaviour
     private bool _isDragging = false;
     [SerializeField, ReadOnly]
     private int _savedSortingOrder;
+    [ReadOnly]
+    public bool isPlaced = false;
 
     #region Unity
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _collider = GetComponent<Collider2D>();
+        isPlaced = false;
     }
     #endregion
 
@@ -38,19 +41,24 @@ public class DraggableObject : MonoBehaviour
     private void OnMouseDown()
     {
         //Debug.Log($"Mouse clicked on {name}");
-        StartDrag();
+        if(GameManager.instance.currentPhase == GameManager.GamePhase.ENVIRONMENT)
+            GameManager.instance.OnStartEditing(this);
+        else if(GameManager.instance.currentPhase == GameManager.GamePhase.EDITION)
+            StartDrag();
     }
 
     private void OnMouseUp()
     {
         //Debug.Log($"Mouse released click on {name}");
-        EndDrag();
+        if(GameManager.instance.currentPhase == GameManager.GamePhase.EDITION)
+            EndDrag();
     }
 
     private void OnMouseDrag()
     {
         //Debug.Log($"Mouse is dragging {name}");
-        Dragging();
+        if(_isDragging)
+            Dragging();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
