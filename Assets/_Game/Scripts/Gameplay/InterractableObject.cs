@@ -19,6 +19,10 @@ public class InterractableObject : MonoBehaviour
     public bool isPlaced = false;
     [ReadOnly]
     public int savedSortingOrder;
+    private Vector2 _startPosition;
+    private int _startSortingOrder;
+    private Color _startColor;
+    private bool _willBeRemoved;
 
     #region Unity
     private void Start()
@@ -29,6 +33,11 @@ public class InterractableObject : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
         isPlaced = false;
+
+        _startPosition = transform.position;
+        _startColor = spriteRenderer.color;
+        _startSortingOrder = spriteRenderer.sortingOrder;
+        _willBeRemoved = false;
     }
     #endregion
 
@@ -50,6 +59,34 @@ public class InterractableObject : MonoBehaviour
             GameManager.instance.OnStartEditing(this);
     }
 
+    private void OnMouseUp()
+    {
+        if (_willBeRemoved)
+        {
+            RemoveObjectFromBuild();
+            return;
+        }
+    }
+
     public void ResetSortingOrder() => spriteRenderer.sortingOrder = savedSortingOrder;
+    #endregion
+
+    #region Public methods
+    public void CheckRemove(bool toRemove)
+    {
+        _willBeRemoved = toRemove;
+        spriteRenderer.color = toRemove ? Color.blue : _startColor;
+    }
+
+    public void RemoveObjectFromBuild()
+    {
+        if(GameManager.instance.creation.placedObjects.Contains(gameObject))
+            GameManager.instance.creation.placedObjects.Remove(gameObject);
+        GameManager.instance.currentDraggedObject = null;
+        transform.position = _startPosition;
+        spriteRenderer.sortingOrder = _startSortingOrder;
+        isPlaced = false;
+        spriteRenderer.color = _startColor;
+    }
     #endregion
 }

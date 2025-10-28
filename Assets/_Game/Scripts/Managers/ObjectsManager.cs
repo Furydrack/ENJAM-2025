@@ -20,7 +20,7 @@ public class ObjectsManager : MonoBehaviour
 
     private void Start()
     {
-        _interractableObjects.AddRange(GameObject.FindGameObjectsWithTag("DraggableObject"));
+        _interractableObjects.AddRange(GameObject.FindGameObjectsWithTag("InterractableObject"));
 
         foreach (GameObject obj in _interractableObjects)
             if (obj.GetComponent<SpriteRenderer>().sortingOrder > highestSortingOrder)

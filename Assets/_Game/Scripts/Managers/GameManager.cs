@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +28,8 @@ public class GameManager : MonoBehaviour
     public enum GamePhase { ENVIRONMENT, EDITION }
     [ReadOnly]
     public GamePhase currentPhase = GamePhase.ENVIRONMENT;
+    [ReadOnly]
+    public Creation creation;
 
     private void Awake()
     {
@@ -41,6 +45,10 @@ public class GameManager : MonoBehaviour
         _finishButton.onClick.AddListener(OnFinishPhase);
         _returnToEditionButton.onClick.AddListener(() => _confirmPopup.SetActive(false));
         _confirmFinishButton.onClick.AddListener(FinishCreation);
+
+        // Init game
+        creation = new Creation();
+        creation.placedObjects = new List<GameObject>();
 
         InitEnvironmentPhase();
     }
@@ -77,20 +85,37 @@ public class GameManager : MonoBehaviour
         if (currentPhase == GamePhase.ENVIRONMENT)
             _confirmPopup.SetActive(true);
         else if(currentPhase == GamePhase.EDITION)
-            OnEndZoomPhase();
+            OnEndEditionPhase();
     }
 
-    public void OnEndZoomPhase()
+    public void OnEndEditionPhase()
     {
         if(currentDraggedObject != null)
+        {
             currentDraggedObject.isPlaced = true;
+            creation.placedObjects.Add(currentDraggedObject.gameObject);
+        }
         currentDraggedObject = null;
         CameraManager.instance.fade.onFadeInFinished.AddListener(InitEnvironmentPhase);
         CameraManager.instance.GoToGlobalView();
+        ToolsManager.instance.EndEditionPhase();
     }
 
     private void FinishCreation()
     {
         _endScreen.SetActive(true);
     }
+}
+
+[Serializable]
+public struct Creation
+{
+    [ReadOnly]
+    public string creationName;
+    [TextArea, ReadOnly]
+    public string creationDescription;
+    [ReadOnly]
+    public List<GameObject> placedObjects;
+    [ReadOnly]
+    public float price;
 }

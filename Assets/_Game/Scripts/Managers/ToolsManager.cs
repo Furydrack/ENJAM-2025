@@ -43,6 +43,13 @@ public class ToolsManager : MonoBehaviour
         _toggleGroup.SetAllTogglesOff();
     }
 
+    public void EndEditionPhase()
+    {
+        currentToolUsed = CurrentToolUsed.NONE;
+        ToggleFocus(false);
+        HideTools();
+    }
+
     public void HideTools()
     {
         _uiContainer.SetActive(false);
@@ -65,6 +72,7 @@ public class ToolsManager : MonoBehaviour
             ToggleFocus(true);
 
         currentToolUsed = (CurrentToolUsed)tool;
+        Debug.Log($"{currentToolUsed} is used");
     }
 
     private void ToggleFocus(bool enable)
@@ -78,7 +86,7 @@ public class ToolsManager : MonoBehaviour
         else
         {
             _focusBackgroundRenderer.gameObject.SetActive(false);
-            GameManager.instance.currentDraggedObject.ResetSortingOrder();
+            GameManager.instance.currentDraggedObject?.ResetSortingOrder();
         }
     }
 }
