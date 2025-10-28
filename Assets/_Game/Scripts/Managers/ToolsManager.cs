@@ -18,6 +18,9 @@ public class ToolsManager : MonoBehaviour
     [SerializeField, ReadOnly]
     private List<Toggle> _toolsToggle; // Order important
 
+    [Title("Settings")]
+    public StretchSettingsSO stretchSettings;
+
     public enum CurrentToolUsed { NONE = 0, STRETCH = 1 }
     [Title("Runtime"), ReadOnly]
     public CurrentToolUsed currentToolUsed = CurrentToolUsed.NONE;
