@@ -6,7 +6,8 @@ using System.Linq;
 public class DraggableObject : MonoBehaviour
 {
     Collider2D _collider;
-    SpriteRenderer _spriteRenderer;
+    [HideInInspector]
+    public SpriteRenderer spriteRenderer;
 
     [Title("Runtime")]
     [SerializeField, ReadOnly]
@@ -21,7 +22,7 @@ public class DraggableObject : MonoBehaviour
     #region Unity
     private void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         _collider = GetComponent<Collider2D>();
         isPlaced = false;
     }
@@ -40,7 +41,10 @@ public class DraggableObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        //Debug.Log($"Mouse clicked on {name}");
+        if (!CanDrag()) return;
+
+        _savedSortingOrder = spriteRenderer.sortingOrder;
+
         if(GameManager.instance.currentPhase == GameManager.GamePhase.ENVIRONMENT)
             GameManager.instance.OnStartEditing(this);
         else if(GameManager.instance.currentPhase == GameManager.GamePhase.EDITION)
@@ -49,15 +53,19 @@ public class DraggableObject : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (!CanDrag()) return;
+
         //Debug.Log($"Mouse released click on {name}");
-        if(GameManager.instance.currentPhase == GameManager.GamePhase.EDITION)
+        if (GameManager.instance.currentPhase == GameManager.GamePhase.EDITION)
             EndDrag();
     }
 
     private void OnMouseDrag()
     {
+        if (!CanDrag()) return;
+
         //Debug.Log($"Mouse is dragging {name}");
-        if(_isDragging)
+        if (_isDragging)
             Dragging();
     }
 
@@ -75,12 +83,16 @@ public class DraggableObject : MonoBehaviour
     #endregion
 
     #region Drag gestion
+    private bool CanDrag()
+    {
+        return !ToolsManager.instance.isEditingWithTool;
+    }
+
     private void StartDrag()
     {
         _collider.enabled = false;
         _collider.enabled = true;
-        _savedSortingOrder = _spriteRenderer.sortingOrder;
-        _spriteRenderer.sortingOrder = ObjectsManager.instance.highestSortingOrder+1;
+        spriteRenderer.sortingOrder = ObjectsManager.instance.highestSortingOrder+1;
         _isDragging = true;
     }
 
@@ -109,7 +121,9 @@ public class DraggableObject : MonoBehaviour
             if(highestOrder > ObjectsManager.instance.highestSortingOrder)
                 ObjectsManager.instance.highestSortingOrder = highestOrder;
         }  
-        _spriteRenderer.sortingOrder = newSortingOrder;
+        spriteRenderer.sortingOrder = newSortingOrder;
     }
     #endregion
+
+    public void ResetSortingOrder() => spriteRenderer.sortingOrder = _savedSortingOrder;
 }

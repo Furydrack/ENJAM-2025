@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour
     private GameObject _endScreen;
 
     [Title("Runtime")]
-    [SerializeField, ReadOnly]
-    private DraggableObject _currentDraggedObject;
+    [ReadOnly]
+    public DraggableObject currentDraggedObject;
     public enum GamePhase { ENVIRONMENT, EDITION }
     [ReadOnly]
     public GamePhase currentPhase = GamePhase.ENVIRONMENT;
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     public void OnStartEditing(DraggableObject draggedObject)
     {
-        _currentDraggedObject = draggedObject;
+        currentDraggedObject = draggedObject;
         CameraManager.instance.fade.onFadeInFinished.AddListener(InitEditionPhase);
         CameraManager.instance.GoToZoomView();
     }
@@ -56,14 +56,20 @@ public class GameManager : MonoBehaviour
     {
         CameraManager.instance.fade.onFadeInFinished.RemoveListener(InitEditionPhase);
         currentPhase = GamePhase.EDITION;
-        if(_currentDraggedObject != null && !_currentDraggedObject.isPlaced)
-            _currentDraggedObject.transform.position = _zoomedObjectPlacementRef.transform.position;
+
+        if(currentDraggedObject != null && !currentDraggedObject.isPlaced)
+            currentDraggedObject.transform.position = _zoomedObjectPlacementRef.transform.position;
+
+        // Init Tools
+        ToolsManager.instance.InitTools();
     }
 
     private void InitEnvironmentPhase()
     {
         CameraManager.instance.fade.onFadeInFinished.RemoveListener(InitEnvironmentPhase);
         currentPhase = GamePhase.ENVIRONMENT;
+
+        ToolsManager.instance.HideTools();
     }
 
     private void OnFinishPhase()
@@ -76,9 +82,9 @@ public class GameManager : MonoBehaviour
 
     public void OnEndZoomPhase()
     {
-        if(_currentDraggedObject != null)
-            _currentDraggedObject.isPlaced = true;
-        _currentDraggedObject = null;
+        if(currentDraggedObject != null)
+            currentDraggedObject.isPlaced = true;
+        currentDraggedObject = null;
         CameraManager.instance.fade.onFadeInFinished.AddListener(InitEnvironmentPhase);
         CameraManager.instance.GoToGlobalView();
     }
