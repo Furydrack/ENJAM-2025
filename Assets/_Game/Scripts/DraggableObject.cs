@@ -5,6 +5,7 @@ using System.Linq;
 
 public class DraggableObject : MonoBehaviour
 {
+    Collider2D _collider;
     SpriteRenderer _spriteRenderer;
 
     [Title("Runtime")]
@@ -19,6 +20,7 @@ public class DraggableObject : MonoBehaviour
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _collider = GetComponent<Collider2D>();
     }
     #endregion
 
@@ -67,6 +69,8 @@ public class DraggableObject : MonoBehaviour
     #region Drag gestion
     private void StartDrag()
     {
+        _collider.enabled = false;
+        _collider.enabled = true;
         _savedSortingOrder = _spriteRenderer.sortingOrder;
         _spriteRenderer.sortingOrder = ObjectsManager.instance.highestSortingOrder+1;
         _isDragging = true;
