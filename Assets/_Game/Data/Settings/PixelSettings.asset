@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80059b3e199cb064297c569948c0bc79, type: 3}
   m_Name: PixelSettings
   m_EditorClassIdentifier: 
-  forceCoef: 10
+  forceCoef: 0.1
   limits: {x: 32, y: 2048}

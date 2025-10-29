@@ -10,6 +10,8 @@ public class CameraManager : MonoBehaviour
     private Camera _globalCam;
     [SerializeField]
     private Camera _zoomedCam;
+    [SerializeField]
+    private Camera _endCamera;
     public FadeInOut fade;
 
     private void Awake()
@@ -39,5 +41,18 @@ public class CameraManager : MonoBehaviour
     {
         _zoomedCam.gameObject.SetActive(!globalIsActive);
         _globalCam.gameObject.SetActive(globalIsActive);
+    }
+
+    public void GoToEndCam()
+    {
+        fade.onFadeInFinished.RemoveListener(ToggleCams);
+        fade.onFadeInFinished.AddListener(ToggleCams);
+        fade.LaunchFade();
+    }
+
+    private void ToggleCams()
+    {
+        _globalCam.gameObject.SetActive(false);
+        _endCamera.gameObject.SetActive(true);
     }
 }

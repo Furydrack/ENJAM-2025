@@ -16,6 +16,8 @@ public class Colorable : MonoBehaviour
     #region Detection events
     private void OnMouseDown()
     {
+        if (GameManager.instance.isInUI) return;
+
         if (ToolsManager.instance.currentToolUsed != ToolsManager.CurrentToolUsed.COLOR)
             return;
 
@@ -24,6 +26,8 @@ public class Colorable : MonoBehaviour
 
     private void OnMouseDrag()
     {
+        if (GameManager.instance.isInUI) return;
+
         if (ToolsManager.instance.currentToolUsed != ToolsManager.CurrentToolUsed.COLOR)
             return;
 
@@ -32,6 +36,8 @@ public class Colorable : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (GameManager.instance.isInUI) return;
+
         if (ToolsManager.instance.currentToolUsed != ToolsManager.CurrentToolUsed.COLOR)
             return;
 

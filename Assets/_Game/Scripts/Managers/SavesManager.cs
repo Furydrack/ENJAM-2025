@@ -8,6 +8,7 @@ public class SavesManager : MonoBehaviour
 
     [SerializeField, ReadOnly]
     private CreationLibrary _creationsLibrary;
+    public CreationLibrary creationsLibrary => _creationsLibrary;
 
     private const string CREATIONS_KEY = "Creations";
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Draggable : MonoBehaviour
 {
+    private float rotationSpeed = 10f;
+
     private InterractableObject _object;
 
     public bool isDragging = false;
@@ -18,6 +20,8 @@ public class Draggable : MonoBehaviour
     #region Detection events
     private void OnMouseDown()
     {
+        if (GameManager.instance.isInUI) return;
+
         if (GameManager.instance.currentPhase != GameManager.GamePhase.EDITION || ToolsManager.instance.isEditingWithTool)
             return;
 
@@ -26,6 +30,8 @@ public class Draggable : MonoBehaviour
 
     private void OnMouseDrag()
     {
+        if (GameManager.instance.isInUI) return;
+
         if (GameManager.instance.currentPhase != GameManager.GamePhase.EDITION || ToolsManager.instance.isEditingWithTool)
             return;
 
@@ -34,6 +40,8 @@ public class Draggable : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (GameManager.instance.isInUI) return;
+
         if (GameManager.instance.currentPhase != GameManager.GamePhase.EDITION || ToolsManager.instance.isEditingWithTool)
             return;
 
@@ -60,20 +68,37 @@ public class Draggable : MonoBehaviour
     #endregion
 
     #region Drag gestion
+    Vector3 _startOffet;
     private void StartDrag()
     {
+        GameManager.instance.currentDraggedObject = _object;
         _object.collider.enabled = false;
         _object.collider.enabled = true;
         _object.spriteRenderer.sortingOrder = ObjectsManager.instance.highestSortingOrder + 1;
         isDragging = true;
+
+        Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+
+        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
+        _startOffet = transform.position - curPosition;
     }
 
     private void Dragging()
     {
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
 
-        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + new Vector3(0f, 0f, 10f);
-        transform.position = curPosition;
+        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
+
+        transform.position = curPosition + _startOffet;
+
+        // Rotate
+        float scrollDelta = Input.mouseScrollDelta.y;
+
+        if (Mathf.Abs(scrollDelta) > 0.01f)
+        {
+            // Fait tourner l'objet autour de son axe Z (2D)
+            transform.Rotate(Vector3.forward, -scrollDelta * rotationSpeed, Space.Self);
+        }
     }
 
     private void EndDrag()

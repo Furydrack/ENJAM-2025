@@ -15,6 +15,8 @@ public class Pixelable : MonoBehaviour
     #region Detection events
     private void OnMouseDown()
     {
+        if (GameManager.instance.isInUI) return;
+
         if (ToolsManager.instance.currentToolUsed != ToolsManager.CurrentToolUsed.PIXEL)
             return;
 
@@ -23,6 +25,8 @@ public class Pixelable : MonoBehaviour
 
     private void OnMouseDrag()
     {
+        if (GameManager.instance.isInUI) return;
+
         if (ToolsManager.instance.currentToolUsed != ToolsManager.CurrentToolUsed.PIXEL)
             return;
 
@@ -31,6 +35,8 @@ public class Pixelable : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (GameManager.instance.isInUI) return;
+
         if (ToolsManager.instance.currentToolUsed != ToolsManager.CurrentToolUsed.PIXEL)
             return;
 
@@ -52,7 +58,8 @@ public class Pixelable : MonoBehaviour
 
         Material mat = _object.spriteRenderer.material;
 
-        float pixelSize = Mathf.Clamp(mat.GetFloat("_PixelSize") + (mouseDelta.normalized.x + mouseDelta.normalized.y) * _settings.forceCoef, _settings.limits.x, _settings.limits.y);
+        float force = mouseDelta.x > mouseDelta.y ? mouseDelta.x : mouseDelta.y;
+        float pixelSize = Mathf.Clamp(mat.GetFloat("_PixelSize") * (1f + force * _settings.forceCoef), _settings.limits.x, _settings.limits.y);
 
         mat.SetFloat("_PixelSize", pixelSize);
     }

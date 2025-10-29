@@ -19,6 +19,8 @@ public class Stretchable : MonoBehaviour
     #region Detection events
     private void OnMouseDown()
     {
+        if (GameManager.instance.isInUI) return;
+
         if (GameManager.instance.currentPhase != GameManager.GamePhase.EDITION || ToolsManager.instance.currentToolUsed != ToolsManager.CurrentToolUsed.STRETCH)
             return;
 
@@ -27,6 +29,8 @@ public class Stretchable : MonoBehaviour
 
     private void OnMouseDrag()
     {
+        if (GameManager.instance.isInUI) return;
+
         if (GameManager.instance.currentPhase != GameManager.GamePhase.EDITION || ToolsManager.instance.currentToolUsed != ToolsManager.CurrentToolUsed.STRETCH)
             return;
 
@@ -35,6 +39,8 @@ public class Stretchable : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (GameManager.instance.isInUI) return;
+
         if (GameManager.instance.currentPhase != GameManager.GamePhase.EDITION || ToolsManager.instance.currentToolUsed != ToolsManager.CurrentToolUsed.STRETCH)
             return;
 

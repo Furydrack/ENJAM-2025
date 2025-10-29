@@ -44,23 +44,40 @@ public class InterractableObject : MonoBehaviour
     #region Detection events
     private void OnMouseEnter()
     {
+        if (GameManager.instance.isInUI) return;
+
         //Debug.Log($"Mouse entered {name}");
+        CursorManager.instance.isHovering = true;
     }
 
     private void OnMouseExit()
     {
+        if (GameManager.instance.isInUI) return;
+
         //Debug.Log($"Mouse exited {name}");
+        CursorManager.instance.isHovering = false;
     }
 
     private void OnMouseDown()
     {
+        if (GameManager.instance.isInUI) return;
+
+        CursorManager.instance.isHovering = false;
+        CursorManager.instance.isGrabing = true;
         savedSortingOrder = spriteRenderer.sortingOrder;
         if (GameManager.instance.currentPhase == GameManager.GamePhase.ENVIRONMENT)
+        {
+            collider.enabled = false;
+            collider.enabled = true;
             GameManager.instance.OnStartEditing(this);
+        }
     }
 
     private void OnMouseUp()
     {
+        if (GameManager.instance.isInUI) return;
+
+        CursorManager.instance.isGrabing = false;
         if (_willBeRemoved)
         {
             RemoveObjectFromBuild();

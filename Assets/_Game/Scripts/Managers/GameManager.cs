@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using TriInspector;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -26,12 +28,28 @@ public class GameManager : MonoBehaviour
     private Button _returnToEditionButton;
     [SerializeField, PropertySpace]
     private GameObject _endScreen;
+    [SerializeField]
+    private GameObject _startScreen;
+    [SerializeField, PropertySpace]
+    private Button _startButton;
+
+    public bool isInUI = true;
+
+    [Title("Sounds")]
+    [SerializeField]
+    AudioClip _clickSFX, _stick1SFX, _stick2SFX;
+    [SerializeField]
+    AudioClip _ost;
+    [SerializeField]
+    AudioSource _sfxAudioSource;
+
+    AudioSource _audioSource;
 
 
     [Title("Runtime")]
     [ReadOnly]
     public InterractableObject currentDraggedObject;
-    public enum GamePhase { ENVIRONMENT, EDITION }
+    public enum GamePhase { ENVIRONMENT, EDITION, END }
     [ReadOnly]
     public GamePhase currentPhase = GamePhase.ENVIRONMENT;
     [SerializeField, ReadOnly]
@@ -47,23 +65,46 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
+        isInUI = true;
+
         // Bind events
         _confirmPopup.SetActive(false);
         _endScreen.SetActive(false);
         _finishButton.onClick.AddListener(OnFinishPhase);
-        _returnToEditionButton.onClick.AddListener(() => _confirmPopup.SetActive(false));
+        _returnToEditionButton.onClick.AddListener(ClosePopup);
         _confirmFinishButton.onClick.AddListener(FinishCreation);
         _goToCreationButton.onClick.AddListener(GoToCreation);
+        _startButton.onClick.AddListener(StartGame);
+        ToolsManager.instance.HideTools();
 
         // Init game
         _creation = new Creation();
         placedObjects = new List<GameObject>();
+        _finishButton.gameObject.SetActive(false);
+        _goToCreationButton.gameObject.SetActive(false);
 
+        _startScreen.gameObject.SetActive(true);
+    }
+
+    private void StartGame()
+    {
+        isInUI = false;
+        _startScreen.gameObject.SetActive(false);
+        _finishButton.gameObject.SetActive(true);
         InitEnvironmentPhase();
+        CursorManager.instance.SetCustomCursor();
+
+        _audioSource.clip = _ost;
+        _audioSource.loop = true;
+        _audioSource.Play();
     }
 
     public void OnStartEditing(InterractableObject draggedObject)
     {
+        _sfxAudioSource.clip = _clickSFX;
+        _sfxAudioSource.Play();
+
         currentDraggedObject = draggedObject;
         CameraManager.instance.fade.onFadeInFinished.AddListener(InitEditionPhase);
         CameraManager.instance.GoToZoomView();
@@ -94,9 +135,21 @@ public class GameManager : MonoBehaviour
     private void OnFinishPhase()
     {
         if (currentPhase == GamePhase.ENVIRONMENT)
-            _confirmPopup.SetActive(true);
+            EnablePopup();
         else if(currentPhase == GamePhase.EDITION)
             OnEndEditionPhase();
+    }
+
+    private void EnablePopup()
+    {
+        _confirmPopup.SetActive(true);
+        isInUI = true;
+    }
+
+    private void ClosePopup()
+    {
+        _confirmPopup.SetActive(false);
+        isInUI = false;
     }
 
     public void OnEndEditionPhase()
@@ -120,10 +173,28 @@ public class GameManager : MonoBehaviour
 
     private void FinishCreation()
     {
-        _endScreen.SetActive(true);
+        currentPhase = GamePhase.END;
+
+        _confirmPopup.SetActive(false);
 
         // @todo move this code to the real finish creation after editing
         _creation = new Creation(placedObjects);
-        SavesManager.instance.AddCreationToLibrary(_creation);
+
+        // Move to view
+        CameraManager.instance.GoToEndCam();
+        CameraManager.instance.fade.onFadeInFinished.AddListener(InitEndView);
+
+        //SavesManager.instance.AddCreationToLibrary(_creation);
+    }
+
+    private void InitEndView()
+    {
+        isInUI = true;
+        _goToCreationButton.gameObject.SetActive(false);
+        CameraManager.instance.fade.onFadeInFinished.RemoveListener(InitEndView);
+        _endScreen.SetActive(true);
+        _finishButton.GetComponentInChildren<TMP_Text>().text = "Retry";
+        _finishButton.onClick.RemoveAllListeners();
+        _finishButton.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name));
     }
 }

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ColoringSettings
   m_EditorClassIdentifier: 
   _randomFork: {x: -1, y: 1}
-  forceCoef: 0.0001
+  forceCoef: 0.001
