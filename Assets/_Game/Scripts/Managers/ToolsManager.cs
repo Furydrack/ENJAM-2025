@@ -2,7 +2,6 @@ using TriInspector;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using System;
 
 public class ToolsManager : MonoBehaviour
 {
@@ -21,8 +20,9 @@ public class ToolsManager : MonoBehaviour
     [Title("Settings")]
     public StretchSettingsSO stretchSettings;
     public ColorSettingsSO colorSettings;
+    public PixelSettingsSO pixelSettings;
 
-    public enum CurrentToolUsed { NONE = 0, STRETCH = 1, COLOR = 2 }
+    public enum CurrentToolUsed { NONE = 0, STRETCH = 1, COLOR = 2, PIXEL = 3 }
     [Title("Runtime"), ReadOnly]
     public CurrentToolUsed currentToolUsed = CurrentToolUsed.NONE;
     public bool isEditingWithTool => currentToolUsed != CurrentToolUsed.NONE;
