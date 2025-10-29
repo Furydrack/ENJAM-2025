@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: StretchSettings
   m_EditorClassIdentifier: 
   forceCoef: 0.01
-  minScale: {x: 0.1, y: 0.1}
-  maxScale: {x: 2.5, y: 2.5}
+  minScaleProportion: {x: 0.8, y: 0.8}
+  maxScaleProportion: {x: 0.8, y: 0.8}

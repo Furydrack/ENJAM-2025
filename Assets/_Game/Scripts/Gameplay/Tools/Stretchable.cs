@@ -7,9 +7,13 @@ public class Stretchable : MonoBehaviour
 
     private Vector2Int _mouseSign;
 
+    private Vector2 _minScale, _maxScale;
+
     private void Start()
     {
         _settings = ToolsManager.instance.stretchSettings;
+        _minScale = new Vector2(transform.localScale.x * (1f-_settings.minScaleProportion.x), transform.localScale.y * (1f-_settings.minScaleProportion.y));
+        _maxScale = new Vector2(transform.localScale.x * (1f+_settings.maxScaleProportion.x), transform.localScale.y * (1f+_settings.maxScaleProportion.y));
     }
 
     #region Detection events
@@ -73,8 +77,8 @@ public class Stretchable : MonoBehaviour
             scale.y += strecthForce;
         }
 
-        scale.x = Mathf.Clamp(scale.x, _settings.minScale.x, _settings.maxScale.x);
-        scale.y = Mathf.Clamp(scale.y, _settings.minScale.y, _settings.maxScale.y);
+        scale.x = Mathf.Clamp(scale.x, _minScale.x, _maxScale.x);
+        scale.y = Mathf.Clamp(scale.y, _minScale.y, _maxScale.y);
 
         transform.localScale = scale;
     }
