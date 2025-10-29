@@ -21,9 +21,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Button _confirmFinishButton;
     [SerializeField]
+    private Button _goToCreationButton;
+    [SerializeField]
     private Button _returnToEditionButton;
     [SerializeField, PropertySpace]
     private GameObject _endScreen;
+
 
     [Title("Runtime")]
     [ReadOnly]
@@ -50,6 +53,7 @@ public class GameManager : MonoBehaviour
         _finishButton.onClick.AddListener(OnFinishPhase);
         _returnToEditionButton.onClick.AddListener(() => _confirmPopup.SetActive(false));
         _confirmFinishButton.onClick.AddListener(FinishCreation);
+        _goToCreationButton.onClick.AddListener(GoToCreation);
 
         // Init game
         _creation = new Creation();
@@ -73,6 +77,7 @@ public class GameManager : MonoBehaviour
         if(currentDraggedObject != null && !currentDraggedObject.isPlaced)
             currentDraggedObject.transform.position = _zoomedObjectPlacementRef.transform.position;
 
+        _goToCreationButton.gameObject.SetActive(false);
         // Init Tools
         ToolsManager.instance.InitTools();
     }
@@ -82,6 +87,7 @@ public class GameManager : MonoBehaviour
         CameraManager.instance.fade.onFadeInFinished.RemoveListener(InitEnvironmentPhase);
         currentPhase = GamePhase.ENVIRONMENT;
 
+        _goToCreationButton.gameObject.SetActive(true);
         ToolsManager.instance.HideTools();
     }
 
@@ -104,6 +110,12 @@ public class GameManager : MonoBehaviour
         CameraManager.instance.fade.onFadeInFinished.AddListener(InitEnvironmentPhase);
         CameraManager.instance.GoToGlobalView();
         ToolsManager.instance.EndEditionPhase();
+    }
+
+    private void GoToCreation()
+    {
+        if (GameManager.instance.currentPhase == GameManager.GamePhase.ENVIRONMENT)
+            GameManager.instance.OnStartEditing(null);
     }
 
     private void FinishCreation()
