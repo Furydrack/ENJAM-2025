@@ -80,8 +80,8 @@ public class InterractableObject : MonoBehaviour
 
     public void RemoveObjectFromBuild()
     {
-        if(GameManager.instance.creation.placedObjects.Contains(gameObject))
-            GameManager.instance.creation.placedObjects.Remove(gameObject);
+        if(GameManager.instance.placedObjects.Contains(gameObject))
+            GameManager.instance.placedObjects.Remove(gameObject);
         GameManager.instance.currentDraggedObject = null;
         transform.position = _startPosition;
         spriteRenderer.sortingOrder = _startSortingOrder;

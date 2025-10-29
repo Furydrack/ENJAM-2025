@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [Title("Refs")]
+    //[Header("Environment")]
+    //[SerializeField]
+    //private Transform _creationParent;
     [SerializeField]
     private Transform _zoomedObjectPlacementRef;
     [Header("UI"), SerializeField]
@@ -28,8 +31,10 @@ public class GameManager : MonoBehaviour
     public enum GamePhase { ENVIRONMENT, EDITION }
     [ReadOnly]
     public GamePhase currentPhase = GamePhase.ENVIRONMENT;
+    [SerializeField, ReadOnly]
+    private Creation _creation;
     [ReadOnly]
-    public Creation creation;
+    public List<GameObject> placedObjects;
 
     private void Awake()
     {
@@ -47,8 +52,8 @@ public class GameManager : MonoBehaviour
         _confirmFinishButton.onClick.AddListener(FinishCreation);
 
         // Init game
-        creation = new Creation();
-        creation.placedObjects = new List<GameObject>();
+        _creation = new Creation();
+        placedObjects = new List<GameObject>();
 
         InitEnvironmentPhase();
     }
@@ -93,7 +98,7 @@ public class GameManager : MonoBehaviour
         if(currentDraggedObject != null)
         {
             currentDraggedObject.isPlaced = true;
-            creation.placedObjects.Add(currentDraggedObject.gameObject);
+            placedObjects.Add(currentDraggedObject.gameObject);
         }
         currentDraggedObject = null;
         CameraManager.instance.fade.onFadeInFinished.AddListener(InitEnvironmentPhase);
@@ -104,18 +109,9 @@ public class GameManager : MonoBehaviour
     private void FinishCreation()
     {
         _endScreen.SetActive(true);
-    }
-}
 
-[Serializable]
-public struct Creation
-{
-    [ReadOnly]
-    public string creationName;
-    [TextArea, ReadOnly]
-    public string creationDescription;
-    [ReadOnly]
-    public List<GameObject> placedObjects;
-    [ReadOnly]
-    public float price;
+        // @todo move this code to the real finish creation after editing
+        _creation = new Creation(placedObjects);
+        SavesManager.instance.AddCreationToLibrary(_creation);
+    }
 }
