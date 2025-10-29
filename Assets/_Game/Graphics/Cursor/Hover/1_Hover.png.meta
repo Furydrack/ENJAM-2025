@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -37,13 +37,13 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -52,9 +52,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -95,12 +95,276 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: 1_Hover_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1606
+        width: 712
+        height: 803
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 257dbf73c2cb4ef459f57bf3dac2c5e1
+      internalID: 1809188658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_Hover_1
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 1606
+        width: 712
+        height: 803
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4be0067a1a7c61441a6a6218a137d72d
+      internalID: 1738648186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_Hover_2
+      rect:
+        serializedVersion: 2
+        x: 1424
+        y: 1606
+        width: 712
+        height: 803
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 425fdf9809b3aa243b11ac3556fee43f
+      internalID: -1631183106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_Hover_3
+      rect:
+        serializedVersion: 2
+        x: 2136
+        y: 1606
+        width: 712
+        height: 803
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09b630427d3f495469363e2facc9ee2b
+      internalID: 839167523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_Hover_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 803
+        width: 712
+        height: 803
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36427ca0d2defda4f8f7236d7c93008a
+      internalID: -602020850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_Hover_5
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 803
+        width: 712
+        height: 803
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a496518477416d04fb07f74ccdf99712
+      internalID: 1504040810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_Hover_6
+      rect:
+        serializedVersion: 2
+        x: 1424
+        y: 803
+        width: 712
+        height: 803
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13ac58ab01bb6154fa351574daed5395
+      internalID: -361333181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_Hover_7
+      rect:
+        serializedVersion: 2
+        x: 2136
+        y: 803
+        width: 712
+        height: 803
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7c8731405ebff347b1dd03e55f615df
+      internalID: 1108632913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_Hover_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 712
+        height: 803
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 770fc064b095caa44b532156d4eeec3e
+      internalID: -1280401175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_Hover_9
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 0
+        width: 712
+        height: 803
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6a55884c741d984c80fa0798c1858b0
+      internalID: -1583430070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_Hover_10
+      rect:
+        serializedVersion: 2
+        x: 1424
+        y: 0
+        width: 712
+        height: 803
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6d65b516cea6bd4fbcb5e3a341f346f
+      internalID: -1059874463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1_Hover_11
+      rect:
+        serializedVersion: 2
+        x: 2136
+        y: 0
+        width: 712
+        height: 803
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ed9af83a40b7c3428d2dd0896c8f67d
+      internalID: -1266559331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: aa217d13102d6b2409986392a24c2f81
     internalID: 0
     vertices: []
     indices: 
@@ -109,7 +373,19 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      1_Hover_0: 1809188658
+      1_Hover_1: 1738648186
+      1_Hover_10: -1059874463
+      1_Hover_11: -1266559331
+      1_Hover_2: -1631183106
+      1_Hover_3: 839167523
+      1_Hover_4: -602020850
+      1_Hover_5: 1504040810
+      1_Hover_6: -361333181
+      1_Hover_7: 1108632913
+      1_Hover_8: -1280401175
+      1_Hover_9: -1583430070
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
