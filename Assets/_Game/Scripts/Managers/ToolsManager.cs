@@ -20,8 +20,9 @@ public class ToolsManager : MonoBehaviour
 
     [Title("Settings")]
     public StretchSettingsSO stretchSettings;
+    public ColorSettingsSO colorSettings;
 
-    public enum CurrentToolUsed { NONE = 0, STRETCH = 1 }
+    public enum CurrentToolUsed { NONE = 0, STRETCH = 1, COLOR = 2 }
     [Title("Runtime"), ReadOnly]
     public CurrentToolUsed currentToolUsed = CurrentToolUsed.NONE;
     public bool isEditingWithTool => currentToolUsed != CurrentToolUsed.NONE;
