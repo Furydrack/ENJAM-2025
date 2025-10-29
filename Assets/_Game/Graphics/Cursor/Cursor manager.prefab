@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &662694724119046885
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 896930350646306038}
+  - component: {fileID: 4740322373229804491}
+  m_Layer: 0
+  m_Name: Cursor manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &896930350646306038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662694724119046885}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4740322373229804491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662694724119046885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d87a4db383892449b0dd2fe146c92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BasicCursor: {fileID: 2800000, guid: 124345241e079464bb8d52a21e91f8ce, type: 3}
+  CursorHoverArray:
+  - {fileID: 2800000, guid: ad0faf2d0349c1343abf02e39cc457da, type: 3}
+  - {fileID: 2800000, guid: a1302f078e1d54b41bebe2d77560a46a, type: 3}
+  - {fileID: 2800000, guid: d4a5cc086b1d2a741b1f7872c4207336, type: 3}
+  - {fileID: 2800000, guid: 72f8d52ba6d03094792617c5aae6ab46, type: 3}
+  - {fileID: 2800000, guid: b548ab2eeaa60044d8e1221fca39652f, type: 3}
+  - {fileID: 2800000, guid: a7444124f0cec19468bf021e98fc48ae, type: 3}
+  - {fileID: 2800000, guid: 9cd2aec90468aed46b902b66023f576c, type: 3}
+  - {fileID: 2800000, guid: 871b91aafd44aa84da201cb7f0dc022d, type: 3}
+  - {fileID: 2800000, guid: d8590dc0cf2bb7a46830381edee77b95, type: 3}
+  - {fileID: 2800000, guid: 1d226494db3e8764b95945c07e8a40fa, type: 3}
+  - {fileID: 2800000, guid: e4f3119c2dea3514ca37c1fd5355dc71, type: 3}
+  - {fileID: 2800000, guid: c4f30d682ad5a7e47b7b4a5edeed19f9, type: 3}
+  CursorGrabArray:
+  - {fileID: 2800000, guid: df0a3c0af9ed1284090ae776369ac91b, type: 3}
+  - {fileID: 2800000, guid: 14bf2e144d2db7944b3d240e3de13754, type: 3}
+  - {fileID: 2800000, guid: 186394babb2b0ce4eb99b5bd01b5bbfe, type: 3}
+  - {fileID: 2800000, guid: 2cdfe7c1955043544ab2a65a2c2e02fa, type: 3}
+  frameCount: 2
+  framerate: 0.2
